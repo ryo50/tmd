@@ -31,6 +31,9 @@ app.get("/download", async (req, res) => {
 
     if (!videoRes.ok) return res.status(500).send("Failed to fetch video");
 
+    // ✅ CORSヘッダーを追加
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     // 4. ブラウザにストリームで返す
     res.setHeader("Content-Disposition", "attachment; filename=video.mp4");
     videoRes.body.pipe(res);
