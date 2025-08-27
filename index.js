@@ -26,7 +26,7 @@ app.get("/download", async (req, res) => {
 
     // 3. Referer付きで動画取得
     const videoRes = await fetch(videoUrl, {
-      headers: { Referer: encodeURIComponent(targetUrl) },
+      headers: { Referer: targetUrl },
     });
 
     if (!videoRes.ok) return res.status(500).send("Failed to fetch video");
