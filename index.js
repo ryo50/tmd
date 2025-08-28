@@ -46,7 +46,7 @@ app.get('/download', async (req, res) => {
     }
 
     // 4. ブラウザにストリームで返す
-    const videoFileName = videoUrl.split('/').pop() // URLの最後の部分
+    let videoFileName = videoUrl.split('/').pop() // URLの最後の部分
     // 拡張子が付いていなければ .mp4 を付与
     if (!videoFileName.match(/\.(mp4|mkv|mov|avi)$/i)) {
       videoFileName += '.mp4'
