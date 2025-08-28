@@ -36,6 +36,15 @@ app.get('/download', async (req, res) => {
     // ✅ CORSヘッダーを追加
     res.setHeader('Access-Control-Allow-Origin', '*')
 
+    // 元のレスポンスから Content-Type / Content-Length を転送
+    res.setHeader(
+      'Content-Type',
+      videoRes.headers.get('content-type') || 'video/mp4'
+    )
+    if (videoRes.headers.get('content-length')) {
+      res.setHeader('Content-Length', videoRes.headers.get('content-length'))
+    }
+
     // 4. ブラウザにストリームで返す
     const videoFileName = videoUrl.split('/').pop() // URLの最後の部分
     res.setHeader(
@@ -43,8 +52,8 @@ app.get('/download', async (req, res) => {
       `attachment; filename="${videoFileName}"`
     )
     res.setHeader('Access-Control-Allow-Origin', '*')
-    videoRes.body.pipe(res)
 
+    // ストリーミング転送
     videoRes.body.pipe(res)
   } catch (err) {
     console.error(err)
