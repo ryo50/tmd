@@ -57,7 +57,7 @@ app.get('/download', async (req, res) => {
       'Content-Disposition',
       `attachment; filename="${videoFileName}"`
     )
-    // res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition')
     res.setHeader('Access-Control-Allow-Origin', '*')
 
     // ストリーミング転送
