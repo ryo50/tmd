@@ -47,6 +47,7 @@ app.get('/download', async (req, res) => {
 
     // 4. ブラウザにストリームで返す
     const videoFileName = videoUrl.split('/').pop() // URLの最後の部分
+    console.log('videoFileName: ' + videoFileName)
     res.setHeader(
       'Content-Disposition',
       `attachment; filename="${videoFileName}"`
